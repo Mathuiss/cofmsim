@@ -132,7 +132,6 @@ iteration,red_power,blue_power,cofm_ratio,win_side
 7,11.013691,5.131942,2.15,RED
 8,9.801474,7.4108186,1.32,RED
 9,9.165158,8.491649,1.08,BLUE
-...
 ```
 
 When using the `-o` option, the system spawns a background thread that writes the results to disk asynchronously. When running extremely large amounts of simulations, it might take a while for your system to write all the results to your file system after the simulations have finished.

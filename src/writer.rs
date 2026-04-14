@@ -4,6 +4,8 @@ use csv::Writer;
 
 use crate::models::BattleResult;
 
+/// Spawns a background thread that writes a record to the output `.csv` file,
+/// every time a `BattleResult` is sent through the `mspc` channel.
 pub fn spawn_writer(channel: Receiver<BattleResult>, mut writer: Writer<File>) {
     thread::spawn(move || {
         let mut handle = channel.iter();

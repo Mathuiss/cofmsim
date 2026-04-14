@@ -30,7 +30,7 @@ impl<'a> SimulationEngine<'a> {
 
             let final_red = red_power * m_red;
 
-            // 2. Calculate Blue Force Power
+            // Calculate Blue Force Power
             let blue_power = Self::calculate_force_power(&self.config.force_blue, &mut rng);
             let m_blue =
                 rng.random_range(self.config.force_blue.m_min..=self.config.force_blue.m_max);
@@ -47,8 +47,10 @@ impl<'a> SimulationEngine<'a> {
                 f32::MAX
             };
 
+            // Push cofm result
             q_ratios.push(q_ratio);
 
+            // Determine success
             let success = if q_ratio > self.config.simulation.success_threshold {
                 success_count += 1;
                 true
@@ -56,6 +58,7 @@ impl<'a> SimulationEngine<'a> {
                 false
             };
 
+            // Push to sender if available
             if let Some(s) = &self.sender {
                 _ = s.send(BattleResult {
                     iteration: i,
