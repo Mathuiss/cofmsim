@@ -1,15 +1,18 @@
+use std::sync::mpsc::Sender;
+
 use rand::{RngExt, rngs::ThreadRng};
 
-use crate::models::{ForceConfig, SimulationResult, WargameScenario};
+use crate::models::{BattleResult, ForceConfig, SimulationResult, WargameScenario};
 
 /// The core stochastic execution engine
 pub struct SimulationEngine<'a> {
     pub config: &'a WargameScenario,
+    sender: Option<Sender<BattleResult>>,
 }
 
 impl<'a> SimulationEngine<'a> {
-    pub fn new(config: &'a WargameScenario) -> Self {
-        Self { config }
+    pub fn new(config: &'a WargameScenario, sender: Option<Sender<BattleResult>>) -> Self {
+        Self { config, sender }
     }
 
     /// Executes the Monte Carlo loops and returns the distribution and win probability
@@ -20,7 +23,7 @@ impl<'a> SimulationEngine<'a> {
         let mut q_ratios = Vec::with_capacity(iterations);
         let mut success_count = 0;
 
-        for _ in 0..iterations {
+        for i in 0..iterations {
             // Calculate Red Force Power
             let red_power = Self::calculate_force_power(&self.config.force_red, &mut rng);
             let m_red = rng.random_range(self.config.force_red.m_min..=self.config.force_red.m_max);
@@ -46,8 +49,25 @@ impl<'a> SimulationEngine<'a> {
 
             q_ratios.push(q_ratio);
 
-            if q_ratio > self.config.simulation.success_threshold {
+            let success = if q_ratio > self.config.simulation.success_threshold {
                 success_count += 1;
+                true
+            } else {
+                false
+            };
+
+            if let Some(s) = &self.sender {
+                _ = s.send(BattleResult {
+                    iteration: i,
+                    red_power: final_red,
+                    blue_power: final_blue,
+                    cofm_ratio: q_ratio,
+                    win_side: if success {
+                        "RED".to_string()
+                    } else {
+                        "BLUE".to_string()
+                    },
+                });
             }
         }
 

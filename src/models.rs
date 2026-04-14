@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize)]
 pub struct WargameScenario {
@@ -36,4 +36,13 @@ pub struct SimulationResult {
     pub success_count: usize,
     pub success_probability: f32,
     pub q_ratios: Vec<f32>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct BattleResult {
+    pub iteration: usize,
+    pub red_power: f32,
+    pub blue_power: f32,
+    pub cofm_ratio: f32,
+    pub win_side: String,
 }

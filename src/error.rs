@@ -19,3 +19,11 @@ impl From<toml::de::Error> for SimError {
         }
     }
 }
+
+impl From<csv::Error> for SimError {
+    fn from(value: csv::Error) -> Self {
+        Self {
+            msg: format!("{:?}", value),
+        }
+    }
+}

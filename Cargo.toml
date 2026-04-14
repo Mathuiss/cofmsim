@@ -6,6 +6,7 @@ edition = "2024"
 [dependencies]
 clap = "4.6.0"
 comfy-table = "7.2.2"
+csv = "1.4.0"
 rand = "0.10.1"
 serde = { version = "1.0.228", features = ["derive"] }
 toml = "1.1.2"
