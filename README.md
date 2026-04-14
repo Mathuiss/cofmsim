@@ -121,17 +121,19 @@ Cofmsim can also be run with the `-o` option, which outputs the results of the b
 $ cofmsim -o output.csv
 ...
 $ cat output.csv
-iteration,red_power,blue_power,cofm_ratio,win_side
-0,9.450322,7.5864844,1.25,RED
-1,11.107721,6.9612236,1.6,RED
-2,6.8888144,5.390117,1.28,RED
-3,8.83393,7.8844795,1.12,RED
-4,12.599726,5.7607183,2.19,RED
-5,7.828441,6.6322794,1.18,RED
-6,9.445407,8.335832,1.13,RED
-7,11.013691,5.131942,2.15,RED
-8,9.801474,7.4108186,1.32,RED
-9,9.165158,8.491649,1.08,BLUE
+iteration,red_env,red_quality,blue_env,blue_quality,red_total_force,blue_total_force,cofm_ratio,win_side
+0,0.90272284,7.9356184,1.0544153,7.2158713,7.163664,7.6085253,0.94,BLUE
+1,1.3401346,7.9496145,0.8483275,7.5575624,10.653554,6.4112883,1.66,RED
+2,0.8820734,7.7837906,0.89543927,7.9025826,6.865875,7.076283,0.97,BLUE
+3,1.0447856,8.369499,1.1520641,7.0382915,8.744332,8.108562,1.08,BLUE
+4,0.8332073,8.082886,0.85714865,7.364672,6.7347193,6.3126187,1.07,BLUE
+5,0.8484668,8.481805,0.90865254,7.725404,7.19653,7.0197077,1.03,BLUE
+6,0.91250134,8.411398,0.8323214,7.2231693,7.6754117,6.0119987,1.28,RED
+7,0.9304848,8.165981,0.8565527,7.1097775,7.5983214,6.089899,1.25,RED
+8,1.0822307,8.242065,0.68304396,7.4255767,8.919816,5.0719953,1.76,RED
+9,0.9858538,8.177308,1.1120787,7.271338,8.06163,8.0863,1.0,BLUE
+10,1.3928205,7.6568675,1.000618,7.3150806,10.664641,7.319601,1.46,RED
+...
 ```
 
 When using the `-o` option, the system spawns a background thread that writes the results to disk asynchronously. When running extremely large amounts of simulations, it might take a while for your system to write all the results to your file system after the simulations have finished.

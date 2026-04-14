@@ -35,7 +35,7 @@ fn main() -> Result<(), SimError> {
 
         Stochastic Correlation of Forces and Means Simulator."#,
         )
-        .version("1.1")
+        .version("1.1.1")
         .arg(
             Arg::new("scenario")
                 .default_value("scenario.toml")

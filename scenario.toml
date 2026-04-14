@@ -4,7 +4,7 @@
 # ==========================================
 
 [simulation]
-iterations = 10000
+iterations = 100000
 description = "Evaluates the probability of PLAN SAG forcing passage through a US blockade of Hormuz."
 success_threshold = 1.1 # The COFM ratio required for PLAN to achieve localized dominance
 

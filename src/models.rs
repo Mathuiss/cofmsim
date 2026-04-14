@@ -41,8 +41,12 @@ pub struct SimulationResult {
 #[derive(Debug, Serialize)]
 pub struct BattleResult {
     pub iteration: usize,
-    pub red_power: f32,
-    pub blue_power: f32,
+    pub red_env: f32,
+    pub red_quality: f32,
+    pub blue_env: f32,
+    pub blue_quality: f32,
+    pub red_total_force: f32,
+    pub blue_total_force: f32,
     pub cofm_ratio: f32,
     pub win_side: String,
 }

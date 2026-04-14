@@ -62,8 +62,12 @@ impl<'a> SimulationEngine<'a> {
             if let Some(s) = &self.sender {
                 _ = s.send(BattleResult {
                     iteration: i,
-                    red_power: final_red,
-                    blue_power: final_blue,
+                    red_env: m_red,
+                    red_quality: red_power,
+                    blue_env: m_blue,
+                    blue_quality: blue_power,
+                    red_total_force: final_red,
+                    blue_total_force: final_blue,
                     cofm_ratio: q_ratio,
                     win_side: if success {
                         "RED".to_string()
