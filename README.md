@@ -137,6 +137,6 @@ iteration,red_power,blue_power,cofm_ratio,win_side
 
 When using the `-o` option, the system spawns a background thread that writes the results to disk asynchronously. When running extremely large amounts of simulations, it might take a while for your system to write all the results to your file system after the simulations have finished.
 
-The `.csv` file can then be opened in a tool like SandDance to visualize the results:
+The `.csv` file can then be opened in a tool like [SandDance for VSCode](https://marketplace.visualstudio.com/items?itemName=msrvida.vscode-sanddance) to visualize the results:
 
 ![results_graph](./img/sanddance.png)
