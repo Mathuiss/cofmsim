@@ -9,7 +9,7 @@ COFMsim is a tool that runs [Monte Carlo simulations](https://en.wikipedia.org/w
 
 Install COFMsim for Windows:
 
-- A windows binary is available at: [https://github.com/Mathuiss/cofmsim/releases/tag/v1.1.1](https://github.com/Mathuiss/cofmsim/releases/tag/v1.1.1).
+- A windows binary is available at: [https://github.com/Mathuiss/cofmsim/releases/tag/v1.1.2](https://github.com/Mathuiss/cofmsim/releases/tag/v1.1.2).
 
 On linux, assuming you have cargo installed:
 
