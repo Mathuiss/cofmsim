@@ -1,4 +1,5 @@
 use std::{
+    ffi::OsStr,
     fs::File,
     io::{BufReader, Read},
     path::PathBuf,
@@ -35,7 +36,7 @@ fn main() -> Result<(), SimError> {
 
         Stochastic Correlation of Forces and Means Simulator."#,
         )
-        .version("1.1.1")
+        .version("1.1.2")
         .arg(
             Arg::new("scenario")
                 .default_value("scenario.toml")
@@ -66,7 +67,7 @@ fn main() -> Result<(), SimError> {
         let mut output_path = PathBuf::from(file.trim());
 
         // Check extension
-        if !output_path.ends_with(".csv") {
+        if let None = output_path.extension() {
             output_path.add_extension("csv");
         }
 
