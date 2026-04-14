@@ -1,0 +1,72 @@
+# ==========================================
+# Wargame Scenario: Hormuz Transit
+# Engine: Stochastic COFM Evaluator
+# ==========================================
+
+[simulation]
+iterations = 10000
+description = "Evaluates the probability of PLAN SAG forcing passage through a US blockade of Hormuz."
+success_threshold = 1.1 # The COFM ratio required for PLAN to achieve localized dominance
+
+# ------------------------------------------
+# FORCE RED: PLAN / Iranian Alliance
+# ------------------------------------------
+[force_red]
+name = "PLAN Far-Seas Task Force & Iranian Littoral Assets"
+m_min = 0.8           # Lower bound of Environmental Multiplier (assumes heavy US EW)
+m_max = 1.6           # Upper bound of Environmental Multiplier (assumes optimal A2/AD integration)
+k_variance = 0.10     # 10% Intelligence Uncertainty
+
+    [[force_red.units]]
+    name = "Type 055 Destroyer (Renhai-class)"
+    quantity = 2
+    base_quality = 1.0  # Baseline 'Gold Standard' for this simulation
+
+    [[force_red.units]]
+    name = "Type 052D Destroyer (Luyang III-class)"
+    quantity = 4
+    base_quality = 0.8
+
+    [[force_red.units]]
+    name = "Type 054B Frigate (Jiangkai III-class)"
+    quantity = 2
+    base_quality = 0.65
+
+    [[force_red.units]]
+    name = "Iranian Integrated Coastal A2/AD Battery"
+    quantity = 1        # Modeled as a single aggregate operational unit
+    base_quality = 0.7
+
+    [[force_red.units]]
+    name = "Type 093B SSN (Shang-class)"
+    quantity = 1
+    base_quality = 0.85
+
+# ------------------------------------------
+# FORCE BLUE: United States Navy
+# ------------------------------------------
+[force_blue]
+name = "US Naval Central Command (NAVCENT) / 5th Fleet Assets"
+m_min = 0.6           # Lower bound of Environmental Multiplier (split forces, geographic constriction, weather & EMS conditions)
+m_max = 1.2           # Upper bound of Environmental Multiplier (optimal kill-web networking)
+k_variance = 0.10     # 10% Intelligence Uncertainty
+
+    [[force_blue.units]]
+    name = "Arleigh Burke DDG (Persian Gulf)"
+    quantity = 2
+    base_quality = 0.9
+
+    [[force_blue.units]]
+    name = "Arleigh Burke DDG (Gulf of Oman)"
+    quantity = 4
+    base_quality = 0.9
+
+    [[force_blue.units]]
+    name = "Carrier Strike Group Air Wing (F/A-18 & F-35C)"
+    quantity = 1        # Modeled as a single aggregate operational unit
+    base_quality = 1.0
+
+    [[force_blue.units]]
+    name = "Virginia-class SSN"
+    quantity = 1
+    base_quality = 1.1  # Modeled slightly above the Type 055 baseline due to acoustic superiority
