@@ -3,7 +3,7 @@ Stochastic Correlation of Forces and Means Simulator.
 
 ## What is COFMsim
 
-COFMsim is a tool that runs [Monte Carlo simulations](https://en.wikipedia.org/wiki/Monte_Carlo_method) for a given military operation, based on predefined force parameters. The user specifies these in a scenario file and COFMsim runs simulations using the [Correlations Of Forces and Means (COFM) methodology](https://www.rand.org/pubs/research_reports/RR4235.html). In stead of providing one specific Q value (correlation), it provides a probability that the attacker (red) beats the defender (blue) based on a user defined Q threshold, with a user defined amount of Monte Carlo simulations and Q threshold.
+COFMsim is a tool that runs [Monte Carlo simulations](https://en.wikipedia.org/wiki/Monte_Carlo_method) for a given military operation, based on predefined force parameters. The user specifies these in a scenario file and COFMsim runs simulations using the [Correlations Of Forces and Means (COFM) methodology](https://www.rand.org/pubs/research_reports/RR4235.html). In stead of providing one specific Q value (correlation), it provides a probability that the attacker (red) beats the defender (blue) based on a user defined Q threshold, with a user defined amount of Monte Carlo simulations and a user defined variance in unit quality and environmental factors.
 
 ## Configuraiton
 
