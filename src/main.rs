@@ -9,7 +9,6 @@ use clap::{Arg, Command};
 use csv::WriterBuilder;
 
 use crate::{
-    engine::SimulationEngine,
     error::SimError,
     models::{BattleResult, WargameScenario},
 };
@@ -35,7 +34,7 @@ fn main() -> Result<(), SimError> {
 
         Stochastic Correlation of Forces and Means Simulator."#,
         )
-        .version("1.1.2")
+        .version("1.1.3")
         .arg(
             Arg::new("scenario")
                 .default_value("scenario.toml")
@@ -61,8 +60,7 @@ fn main() -> Result<(), SimError> {
     let sim_config = toml::from_str::<WargameScenario>(&file_content)?;
 
     // Apply engine settings based on output args
-    let engine;
-    if let Some(file) = output_file {
+    let result = if let Some(file) = output_file {
         let mut output_path = PathBuf::from(file.trim());
 
         // Check extension
@@ -73,18 +71,20 @@ fn main() -> Result<(), SimError> {
         // Set up MPSC channels for async CSV writing thread
         let (tx, rx) = mpsc::channel::<BattleResult>();
 
-        // Spawn engine with MPSC transmitter
-        engine = SimulationEngine::new(&sim_config, Some(tx));
-
         // Spawn CSV writer thread
-        writer::spawn_writer(rx, WriterBuilder::new().from_path(output_path)?);
-    } else {
-        // Spawn engine without MPSC transmitter
-        engine = SimulationEngine::new(&sim_config, None);
-    }
+        let handle = writer::spawn_writer(rx, WriterBuilder::new().from_path(output_path)?);
 
-    // Run the simulations
-    let result = engine.run();
+        // Run simulations
+        let result = engine::run(&sim_config, Some(tx));
+
+        // Wait to finish write operations
+        _ = handle.join();
+
+        result
+    } else {
+        // Run simulations
+        engine::run(&sim_config, None)
+    };
 
     // Print results to screen
     view::print_result_table(&sim_config, &result);
